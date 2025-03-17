@@ -75,4 +75,4 @@ In ansible, if you attempt to use a variable which is note decalred, then it ret
 How to gather the facts of the nodes mentioned on the inventory:
     $ ansible -i inv all  -e ansible_user=ec2-user -e ansible_password=DevOps321 -m ansible.builtin.gather_facts
 
->>> If a playbook has 5 tasks, task 1,2,3,4,5 in order, what will happen if the task 3 fails? Will the test of the tasks get's executed? 
+> If a playbook has 5 tasks, task 1,2,3,4,5 in order, what will happen if the task 3 fails? Will the test of the tasks get's executed? 
