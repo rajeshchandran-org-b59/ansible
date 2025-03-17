@@ -62,12 +62,14 @@ All the playbooks or yaml files should end with an extension as `.yml or .yaml`
 ### How to run an ansible playbook ?
 
     $ ansible-playbook -i inv  -e ansible_user=ec2-user -e ansible_password=DevOps321 playBookName.yml
+    $ ansible-playbook -i inv  -e ansible_user=ec2-user -e ansible_password=DevOps321 003-fileVars.yaml -e env=prod
+    $ ansible-playbook -i inv  -e ansible_user=ec2-user -e ansible_password=DevOps321 007-tags.yaml --tags frontend
 
 ### Variable precendence in ansible
 
-    local variables > play variables 
+    task variables > play variables 
 
-In ansible, if you attempt to use a variable which is node decalred, then it returns an error.
+In ansible, if you attempt to use a variable which is note decalred, then it returns an error.
     > CLIURL' is undefined < 
 
 How to gather the facts of the nodes mentioned on the inventory:
