@@ -1,7 +1,7 @@
 - name: Demo on vars 
   hosts: all                                # host group name 
   vars:                                     # Play level variables
-    URL: "play.google.com"          
+    URL: "play1.google.com"          
   tasks:
     - name: Printing play variable
       ansible.builtin.debug:
@@ -15,7 +15,7 @@
       ansible.builtin.debug:
         msg: "Value of the task variable is {{ URL }}"
       vars:                                   # Task level variables
-        URL: "task.google.com"   
+        URL: "task3.google.com"   
 
     # - name: Printing command variable variables
     #   ansible.builtin.debug:
@@ -23,6 +23,8 @@
 
 - name: Demo on vars on play 2
   hosts: all                                # host group name          
+  vars:                                     # Play level variables
+    URL: "play2.google.com"
   tasks:
     - name: Printing play variable on play 2
       ansible.builtin.debug:
