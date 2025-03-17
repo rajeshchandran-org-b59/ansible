@@ -1,0 +1,14 @@
+- name: Demo on using shell module 
+  hosts: all                                # host group name 
+  tasks:
+    - name: Running uptime command
+      ansible.builtin.shell: uptime
+      register: OUT
+
+    - name: Printing uptime output
+      ansible.builtin.debug: 
+        msg: "{{ OUT.stdout }} and the exit code is {{ OUT.rc }}"
+
+    - name: Printing OS Version and Flavor
+      ansible.builtin.debug: 
+        msg: "Current node flavor is {{ ansible_distribution }} and version is {{ ansible_distribution_version }}"

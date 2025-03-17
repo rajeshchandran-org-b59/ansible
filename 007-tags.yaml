@@ -1,0 +1,33 @@
+- name: Demo on tasks
+  hosts: all 
+  gather_facts: no
+  tasks:
+    - name: Installing frontend
+      ansible.builtin.debug:
+        msg: Installing frontend
+      tags: frontend
+
+    - name: Starting frontend
+      ansible.builtin.debug:
+        msg: Starting frontend
+      tags: frontend
+
+    - name: Installing DB
+      ansible.builtin.debug:
+        msg: Installing DB
+      tags: db 
+
+    - name: Starting DB
+      ansible.builtin.debug:
+        msg: Starting DB
+      tags: db 
+
+    - name: Installing backend
+      ansible.builtin.debug:
+        msg: Installing backend
+      tags: backend
+
+    - name: Starting backend
+      ansible.builtin.debug:
+        msg: Starting backend
+      tags: backend

@@ -1,0 +1,14 @@
+- name: Demo on errors
+  hosts: all                                # host group name 
+  tasks:
+    - name: Printing first message
+      ansible.builtin.debug:
+        msg: "Hello, World!"
+
+    - name: Check if java process is running or not 
+      ansible.builtin.shell: ps -ef | grep java | grep -v grep
+      ignore_errors: yes
+
+    - name: Printing second message
+      ansible.builtin.debug:
+        msg: "Hello, Welcome to ansible"

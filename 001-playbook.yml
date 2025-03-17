@@ -1,0 +1,17 @@
+- name: play1 
+  hosts: all                           # host group name 
+  tasks:
+    - name: task1 of play 1 
+      ansible.builtin.debug:
+        msg: "Hello, World!"
+
+    - name: task2 of play 1 
+      ansible.builtin.debug:
+        msg: "Hello, Ansible Playbooks!"
+
+- name: play2
+  hosts: dev                           # host group name 
+  tasks:
+    - name: task2 of play 1 
+      ansible.builtin.debug:
+        msg: "Ansible is an awesome product"
