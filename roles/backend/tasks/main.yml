@@ -1,0 +1,66 @@
+- name: Configuring hostname
+  ansible.builtin.shell: set-hostname {{ component }}
+
+- name: Disabling the default nodejs verison
+  ansible.builtin.shell: dnf module disable nodejs -y 
+
+- name: Installing Nodejs
+  ansible.builtin.package:
+    name: nodejs
+    state: present
+
+- name: Creating {{ appuser }} app user
+  ansible.builtin.user:
+    name: "{{ appuser }}"
+
+- name: Copy a {{ component }} systemd file 
+  ansible.builtin.copy:
+    src: backend.service
+    dest: /etc/systemd/system/backend.service
+
+- name: Delting the old {{ component }} directory
+  ansible.builtin.file:
+    path: "{{ app_dir }}"
+    state: absent 
+
+- name: Creating App Directoru
+  ansible.builtin.file:
+    path: "{{ app_dir }}"
+    state: directory 
+
+- name: Download & extracting {{ component }} code
+  ansible.builtin.unarchive:
+    src: "{{ url }}"
+    dest: "{{ app_dir }}"
+    remote_src: yes
+
+- name: Installing mysql client
+  ansible.builtin.dnf:
+    name: mysql-server
+    state: present
+
+- name: Installing pre-req package for schema injection
+  ansible.builtin.pip:
+    name: 
+      - PyMySQL
+      - cryptography
+    executable: pip3.11
+
+- name: Generating {{ component }} artifacts
+  community.general.npm:
+    path: "{{ app_dir }}"
+
+- name: Schema Injection
+  community.mysql.mysql_db:
+    name: all
+    state: import
+    target: /app/schema/backend.sql 
+    login_host: 172.31.85.96
+    login_user: root
+    login_password: ExpenseApp@1
+
+- name: Restarting {{ compomnent }} service
+  ansible.builtin.systemd_service:
+    name: backend
+    state: restarted
+    daemon_reload: true

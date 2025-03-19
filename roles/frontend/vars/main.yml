@@ -1,0 +1,4 @@
+component: "frontend"
+url: "https://expense-web-app.s3.amazonaws.com/frontend.zip"
+component_path: "/usr/share/nginx/html"
+proxy_path: "/etc/nginx/default.d/expense.conf"

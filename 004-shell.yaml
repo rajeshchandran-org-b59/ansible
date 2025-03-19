@@ -1,14 +1,6 @@
 - name: Demo on using shell module 
   hosts: all                                # host group name 
   tasks:
-    - name: Running echo command
-      ansible.builtin.shell: echo "Hi Rajesh"
-      register: OUT
-
-    - name: Printing echo output
-      ansible.builtin.debug: 
-        msg: "{{ OUT.stdout }}"
-        
     - name: Running uptime command
       ansible.builtin.shell: uptime
       register: OUT
