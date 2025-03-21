@@ -106,3 +106,15 @@ Here are the top five reasons to use Ansible roles in simple terms:
     3) Makes Scaling Simple – Roles help apply the same setup to many servers without extra work.
     4) Team-Friendly – Different team members can work on different roles separately without causing issues.
     5) Pre-Made Roles Exist – You can find ready-to-use roles online (like on Ansible Galaxy) instead of building everything from scratch.
+
+With multi-environments, here is how we run the playbooks: 
+
+```
+ $ ansible-playbook -i inv-dev  -e ansible_user=ec2-user -e ansible_password=DevOps321 -e env=dev -e component=mysql expense.yaml
+```
+
+> What is role dependency in ansible ?
+
+    When we are calling a role - x and before the start of the role if you want y - role to be executed first then we can define that as a dependent role.
+
+    When you call something using role-dependency main.yml of that particular roles task will be executed first.

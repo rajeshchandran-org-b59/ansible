@@ -1,11 +1,8 @@
-- name: Configuring hostname
-  ansible.builtin.shell: set-hostname {{ component }}
-
-- name: Disabling the default nodejs version
+- name: Disabling the default nodejs verison
   ansible.builtin.shell: dnf module disable nodejs -y 
 
 - name: Installing Nodejs
-  ansible.builtin.package:
+  ansible.builtin.dnf:
     name: nodejs
     state: present
 
@@ -13,26 +10,16 @@
   ansible.builtin.user:
     name: "{{ appuser }}"
 
-- name: Copy a {{ component }} systemd file 
-  ansible.builtin.copy:
+- name: Copying {{ component }} systemd file 
+  ansible.builtin.template:
     src: backend.service
     dest: /etc/systemd/system/backend.service
 
-- name: Delting the old {{ component }} directory
-  ansible.builtin.file:
-    path: "{{ app_dir }}"
-    state: absent 
-
-- name: Creating App Directoru
-  ansible.builtin.file:
-    path: "{{ app_dir }}"
-    state: directory 
-
-- name: Download & extracting {{ component }} code
-  ansible.builtin.unarchive:
-    src: "{{ url }}"
-    dest: "{{ app_dir }}"
-    remote_src: yes
+# Importing a specific task from common role
+- name: Run tasks/other.yaml instead of 'main'
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: pre-req
 
 - name: Installing mysql client
   ansible.builtin.dnf:
@@ -55,7 +42,7 @@
     name: all
     state: import
     target: /app/schema/backend.sql 
-    login_host: 172.31.85.96
+    login_host: mysql-{{ env }}.clouding-app.shop
     login_user: root
     login_password: ExpenseApp@1
 

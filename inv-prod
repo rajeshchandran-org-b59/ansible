@@ -1,0 +1,8 @@
+[frontend]
+frontend-prod.rajeshapps.site
+
+[mysql]
+mysql-prod.rajeshapps.site
+
+[backend]
+backend-prod.rajeshapps.site
