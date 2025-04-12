@@ -1,2 +1,7 @@
 - name: Configuring hostname
   ansible.builtin.shell: set-hostname {{ component }}-{{ env }}
+
+- name: Installing hvac , a pre-requisite for vault
+  ansible.builtin.pip:
+    name: hvac
+    executable: pip3.11 

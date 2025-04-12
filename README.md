@@ -118,3 +118,16 @@ With multi-environments, here is how we run the playbooks:
     When we are calling a role - x and before the start of the role if you want y - role to be executed first then we can define that as a dependent role.
 
     When you call something using role-dependency main.yml of that particular roles task will be executed first.
+
+How ansible-pull works ? 
+    1) This connects to the instance and runs ansible command that connects to the repo and runs the playbook.
+    2) Make sure the machine you're running has ANSIBLE Installed.
+    3) Either you can install ansible in the same provisioner or make sure the ami you're using has ansible installed
+    4) Source can only be on repo.
+
+        $ ansible-pull -u GIT-URL.git playBookName.yaml
+
+When to use ansible-pull vs ansible-push ?
+
+    1) When you've a case where you don't want to keep a node just for ansible.
+    2) Whenever your infrastructure is dynamic ( that means infra comes out and decoms ), that time maintaining inventory is a big deal, in that time, we will ensure the nodes that are provisioned as ANSIBLE install installed and we make that node to pull the playbook using the ansible-pull and run the playbook. 

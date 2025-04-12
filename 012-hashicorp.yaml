@@ -1,0 +1,8 @@
+- name: Reading secrets from vault
+  hosts: localhost                                # host group name 
+  tasks:
+    - name: Read KV2 Secret from Hashicorp Vault
+      ansible.builtin.debug:
+        msg: "Value of the mysql password {{ secrets.MYSQL_PASS }}"
+      vars: 
+        secrets: "{{ lookup('community.hashi_vault.hashi_vault', 'secret=expense-dev/data/backend token={{ token }} url=https://vault.rajeshapps.site:8200  validate_certs=False') }}"

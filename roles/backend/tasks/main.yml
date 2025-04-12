@@ -43,8 +43,8 @@
     state: import
     target: /app/schema/backend.sql 
     login_host: mysql-{{ env }}.rajeshapps.site
-    login_user: root
-    login_password: ExpenseApp@1
+    login_user: "{{ secrets.MYSQL_USER }}"
+    login_password: "{{ secrets.MYSQL_PASS }}"
 
 - name: Restarting {{ compomnent }} service
   ansible.builtin.systemd_service:

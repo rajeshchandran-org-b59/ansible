@@ -1,0 +1,5 @@
+- name: Expense Playbook To Configure {{ component }}
+  hosts: localhost
+  become: yes
+  roles:
+    - "{{ component }}"

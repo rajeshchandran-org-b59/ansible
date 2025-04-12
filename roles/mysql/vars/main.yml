@@ -1,1 +1,2 @@
-compomnent: "my-sql"
+compomnent: "mysql"
+secrets: "{{ lookup('community.hashi_vault.hashi_vault', 'secret=expense-{{ env }}/data/backend token={{ token }} url=https://vault.rajeshapps.site:8200  validate_certs=False') }}"
